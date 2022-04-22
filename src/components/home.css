@@ -1,0 +1,107 @@
+.a {
+    text-decoration: none;
+    color: white;
+}
+.body {
+    font-family: Helvetica, sans-serif;
+}
+.background-image{
+    height:100%;
+    width:100%
+
+}
+
+.home-button {
+    background-color: rgb(144,74,108);
+    color: white;
+    padding: 20px 34px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    border-radius: 40px;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+
+
+
+}
+
+.background {
+    /* height: "100%";
+    width: "100%";  */
+    height:100vh;
+    background-size:cover;
+    position: relative;
+}
+
+
+.title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(144,74,108);
+    color: white;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+
+  }
+
+  .dragon-div {
+    position: absolute;
+    transform: translate(240%, -305%);
+    width: 30%;
+    animation-name: move;
+    animation-duration: 10s;
+
+    animation-iteration-count: infinite;
+
+
+    
+
+  }
+.dragon-img {
+    animation-name: dragon;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+
+    
+
+}
+
+@keyframes move{
+    0% {
+    left: 600px;
+    }
+    100% {
+    left: -90%;
+    }
+  }
+
+@keyframes dragon{
+    0%{
+        transform: scaleX(1.5) rotateZ(-10deg);
+        left: 0px;
+        top: 0px;
+
+    }
+    50%{
+        transform: scaleX(1) rotateZ(0deg);
+        left: 50px;
+
+
+    }
+
+    100%{
+        transform: scaleX(1.5) rotateZ(-10deg);
+        left: 100px;
+
+
+    }
+}

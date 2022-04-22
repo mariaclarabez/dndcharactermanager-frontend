@@ -34,7 +34,10 @@ export default function CharacterView(){
 
     return (
         <>
+            <h1>Dungeons and Dragons Character Generator</h1>
             <Button variant="primary" onClick={() => setShow(true)}>Create Character!</Button>
+            
+            
             <CharacterCreatorModal show={show} onCancel={onCancel} onUpdate={onUpdate}/>
             <Table striped bordered hover>
                 <thead>

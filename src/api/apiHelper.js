@@ -14,5 +14,12 @@ export async function getAllRaces() {
     return (await result.json());
 }
 
+export async function getAllClasses() {
+    console.log("Called", CHARACTER_ENDPOINT + "/classes");
+    const result = await fetch(CHARACTER_ENDPOINT + "/classes");
+    return (await result.json());
+}
+
+
 // const requestBody= {name, classId, raceId};
 // fetch(url, {method: POST, body: JSON.stringify(requestBody)})
