@@ -2,6 +2,20 @@
 const CHARACTER_ENDPOINT = process.env.REACT_APP_BASE_URL + "/ddcharacters";
 
 
+export async function createCharacter(char_name, class_id, race_id) {
+    
+    const requestBody = {char_name, class_id, race_id};
+    console.log(requestBody);
+    const result = await fetch( CHARACTER_ENDPOINT, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+        method: 'POST',
+        body: JSON.stringify(requestBody)
+    });
+
+}
 export async function getCharacter() {
     console.log("Called", CHARACTER_ENDPOINT);
     const result = await fetch(CHARACTER_ENDPOINT);

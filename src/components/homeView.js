@@ -1,5 +1,5 @@
 import './home.css';
-import dragon from "./dragon-2.png"
+import dragon from "./images/dragon-2.png"
 import {Link} from "react-router-dom";
 
 

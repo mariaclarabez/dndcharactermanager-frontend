@@ -38,7 +38,7 @@ export default function CreateCharacterModal({show, onUpdate, onCancel}) {
         console.log(event.target.value);
     }
     function handleNameChange(event) {
-        setName({value: event.target.value});
+        setName(event.target.value);
         console.log(event.target.value)
     }
 
@@ -48,30 +48,21 @@ export default function CreateCharacterModal({show, onUpdate, onCancel}) {
           <Modal.Title>Create Your Character</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <p>Enter a name:</p>
             <Form onSubmit={submit}>
-                <InputGroup>
-                    <FormControl
-                        placeholder="Character name"
-                        aria-label="Character name"/>
-                </InputGroup>
-            </Form>
+                <p>Enter a name:</p>
+                <Form.Control value={name} onChange={handleNameChange} />
+                <br/>
+                <p>Select a race:</p>
+                    <Form.Select value={raceId} onChange={handleRaceChange} aria-label="Default select example">
+                        {allRaces.map(dd_race => <option value={dd_race.id}>{dd_race.name}</option> )}
+                    </Form.Select>
+                <br/>
+                
+                <p>Select a class:</p>
+                    <Form.Select value={classId} onChange={handleClassChange} aria-label="Default select example">
+                        {allClasses.map(dd_class => <option value={dd_class.id}>{dd_class.name}</option> )}
 
-            <br/>
-            <p>Select a race:</p>
-            <Form onSubmit={submit}>
-                <Form.Select value={raceId} onChange={handleRaceChange} aria-label="Default select example">
-                    {allRaces.map(dd_race => <option value={dd_race.id}>{dd_race.name}</option> )}
-
-                </Form.Select>
-            </Form>
-            <br/>
-            <p>Select a class:</p>
-            <Form onSubmit={submit}>
-                <Form.Select value={classId} onChange={handleClassChange} aria-label="Default select example">
-                    {allClasses.map(dd_class => <option value={dd_class.id}>{dd_class.name}</option> )}
-
-                </Form.Select>
+                    </Form.Select>
             </Form>
 
         </Modal.Body>

@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react";
 import Button from "react-bootstrap/Button";
 import Table from 'react-bootstrap/Table';
-import {getCharacter} from "../api/apiHelper";
+import {getCharacter, createCharacter} from "../api/apiHelper";
 import CharacterCreatorModal from './characterCreatorModal';
+import "./characterview.css"
 
 
 
@@ -25,17 +26,20 @@ export default function CharacterView(){
         setShow(false)
     }
 
-    function onUpdate(name, classId, raceId) {
+    async function onUpdate(name, classId, raceId) {
         setShow(false);
-        //create character here 
+        console.log("Creating character", name, classId, raceId);
+        await createCharacter(name, classId, raceId);
         fetchData();
         
     }
 
     return (
         <>
-            <h1>Dungeons and Dragons Character Generator</h1>
-            <Button variant="primary" onClick={() => setShow(true)}>Create Character!</Button>
+        <div className="full-screen">
+            <div className="header"><h1>Welcome to the DnD Character Generator!</h1></div>
+            <div className="create-character-btn">
+            <Button variant="primary" onClick={() => setShow(true)}>Create Character!</Button></div>
             
             
             <CharacterCreatorModal show={show} onCancel={onCancel} onUpdate={onUpdate}/>
@@ -52,6 +56,8 @@ export default function CharacterView(){
                         <th>Dexterity</th>
                         <th>Intelligence</th>
                         <th>Constitution</th>
+                        <th>Action</th>
+                        <th>Owner</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,6 +79,7 @@ export default function CharacterView(){
                 </tbody>
 
             </Table>
+            </div>
         </>
     )
 
