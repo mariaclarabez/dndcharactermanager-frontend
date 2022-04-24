@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Button from "react-bootstrap/Button";
 import Table from 'react-bootstrap/Table';
-import {getCharacter, createCharacter} from "../api/apiHelper";
+import {getCharacter, createCharacter} from "../../api/apiHelper";
 import CharacterCreatorModal from './characterCreatorModal';
 import "./characterview.css"
 
@@ -56,8 +56,8 @@ export default function CharacterView(){
                         <th>Dexterity</th>
                         <th>Intelligence</th>
                         <th>Constitution</th>
+                        <th>Starting Spell</th>
                         <th>Action</th>
-                        <th>Owner</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,14 +65,16 @@ export default function CharacterView(){
                     <tr>
                         <td> {dd_char.id}</td>
                         <td> {dd_char.char_name}</td>
-                        <td> {dd_char.class_id}</td>
-                        <td> {dd_char.race_id}</td>
+                        <td> {dd_char.class_name}</td>
+                        <td> {dd_char.race_name}</td>
                         <td> {dd_char.wisdom}</td>
                         <td> {dd_char.charisma}</td>
                         <td> {dd_char.strength}</td>
                         <td> {dd_char.dexterity}</td>
                         <td> {dd_char.intelligence}</td>
                         <td> {dd_char.constitution}</td>
+                        <td> {dd_char.spell_name}</td>
+
 
                     </tr>    
                 ))}
