@@ -91,7 +91,7 @@
     margin-top: 90px;
     transform: translate(240%, -305%);
     width: 30%;
-    /* animation-name: move; */
+    animation-name: move;
     animation-duration: 10s;
     animation-iteration-count: infinite;
 
@@ -100,7 +100,7 @@
 
   }
 .dragon-img {
-    /* animation-name: dragon; */
+    animation-name: dragon;
     animation-duration: 1s;
     animation-iteration-count: infinite;
 

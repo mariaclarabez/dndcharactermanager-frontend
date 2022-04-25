@@ -3,7 +3,6 @@ import {React, useState} from "react";
 import Button from 'react-bootstrap/Button'
 import '../../api/apiHelper'
 import Form from "react-bootstrap/Form"
-import { getRegisteredUsers, registerUser } from '../../api/apiHelper';
 
 
 export default function RegisterModal({show, onUpdateRegister, onCancel}) {

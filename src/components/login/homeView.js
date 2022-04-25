@@ -1,16 +1,17 @@
 import './home.css';
 import dragon from "../images/dragon-2.png"
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import LoginModal from "./loginModal";
 import RegisterModal from "./registerModal"
 import { React, useState } from "react";
-import {registerUser} from '../../api/apiHelper'
+import {registerUser, loginUser} from '../../api/apiHelper'
 
 
 function HomeView(){
 
     const [showLogin, setShowLogin] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
+    const [loginStatus, setLoginStatus] = useState('');
 
     async function onUpdateRegister(username, password) {
         console.log("attempting to register")
@@ -27,8 +28,10 @@ function HomeView(){
         setShowRegister(true);
 
     };
-    const onLoginSuccess = () => {
-        
+    async function onUpdateLogin() {
+        console.log("Attempting to login");
+        setShowLogin(false);
+    
     }
 
     const onCancelLogin = () => {
@@ -38,8 +41,6 @@ function HomeView(){
     const onCancelRegister = () => {
         setShowRegister(false);
     }
-
-
 
 
     return (
@@ -53,7 +54,7 @@ function HomeView(){
             <h1>Dungeons and Dragons Character Generator</h1>
         </div>
 
-        <LoginModal show={showLogin} onSave={onLoginSuccess} onCancel={onCancelLogin}/>
+        <LoginModal show={showLogin} onUpdateLogin={onUpdateLogin} onCancel={onCancelLogin}/>
 
         <button className="login-button" onClick={login}>Log In</button>
 

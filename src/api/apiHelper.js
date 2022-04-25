@@ -1,8 +1,18 @@
+import { result } from "lodash";
 
 const CHARACTER_ENDPOINT = process.env.REACT_APP_BASE_URL + "/ddcharacters";
-const LOGIN_ENDPOINT = process.env.REACT_APP_BASE_URL + "/login";
-const REGISTER_ENDPOINT = CHARACTER_ENDPOINT + "/users";
+const LOGIN_ENDPOINT = CHARACTER_ENDPOINT + "/login";
+const REGISTER_ENDPOINT = CHARACTER_ENDPOINT + "/register";
+const USER_ENDPOINT = CHARACTER_ENDPOINT + "/users";
 
+
+
+export async function getAllUsers() {
+    console.log("Called", USER_ENDPOINT);
+    const result = await fetch(USER_ENDPOINT);
+    return (await result.json()).data;    
+
+}
 
 export async function registerUser(username, password) {
     const requestBody = {username, password};
@@ -17,12 +27,21 @@ export async function registerUser(username, password) {
         });
     }
 
-export async function getRegisteredUsers() {
-    console.log("Called", REGISTER_ENDPOINT);
-    const result = await fetch(REGISTER_ENDPOINT);
-    return (await result.json()).data;
-}
-
+export async function loginUser(username, password) {
+    const requestBody = {username, password};
+    console.log("Logging", requestBody);
+    console.log("Called", LOGIN_ENDPOINT);
+    const result = await fetch(LOGIN_ENDPOINT, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(requestBody)
+        });
+    return result.json();
+    }
+   
 
 export async function createCharacter(char_name, class_id, race_id) {
     
@@ -36,6 +55,7 @@ export async function createCharacter(char_name, class_id, race_id) {
         method: 'POST',
         body: JSON.stringify(requestBody)
     });
+    console.log(result);
 
 }
 export async function getCharacter() {
@@ -62,21 +82,6 @@ export async function getAllClasses() {
     return (await result.json());
 }
 
-// login
-export async function loginUser(username, password) {
-    const requestBody = {username, password};
-    console.log("Called", LOGIN_ENDPOINT);
-    const result = await fetch(LOGIN_ENDPOINT,
-        {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'POST',
-            body: JSON.stringify(requestBody)
-        });
-    return (await result.json()).data;
-}
 
 
 // const requestBody= {name, classId, raceId};
