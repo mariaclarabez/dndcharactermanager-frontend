@@ -11,6 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={ <HomeView/> } />
           <Route path="create" element={ <CharacterView/> } />
+          <Route path="create/user/:userId" element={<CharacterView />} />
         </Routes>
       </div>
     )

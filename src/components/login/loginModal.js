@@ -30,7 +30,7 @@ export default function LoginModal({show, onUpdateLogin, onCancel}) {
         if (result.error) {
             setLoginError(result.error);
         } else {
-            navigate("/create?userId="+result.id)
+            navigate("/create/user/"+result.id)
             setLoginError();
         }
 
