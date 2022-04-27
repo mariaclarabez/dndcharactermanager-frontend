@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react";
 import Button from "react-bootstrap/Button";
 import Table from 'react-bootstrap/Table';
 import {useParams} from 'react-router-dom';
-import {getCharacter, createCharacter} from "../../api/apiHelper";
+import {getCharacter, createCharacter, deleteCharacter} from "../../api/apiHelper";
 import SpellCreatorModal from "../spellCreatorModal";
 import CreateCampaignModal from "./campaignCreatorModal";
 import CharacterCreatorModal from './characterCreatorModal';
@@ -21,6 +21,9 @@ export default function CharacterView(){
     const [show, setShow] = useState(false);
     const [showCampaign, setShowCampaign] = useState(false);
     const[showSpells, setShowSpells] = useState(false);
+    const [update, showUpdate] = useState(false);
+
+
     const [spellsCharacter, setSpellsCharacter] = useState();
     const params = useParams();
     
@@ -50,6 +53,16 @@ export default function CharacterView(){
         await createCharacter(name, classId, raceId, campaignId, ownerId);
         fetchData();
         
+    }
+
+    async function deleteCharacterById(id) {
+        await deleteCharacter(id);
+        fetchData();
+
+    }
+
+    function updateCharacter () {
+
     }
 
     function showSpellsModal(character) {
@@ -107,8 +120,8 @@ export default function CharacterView(){
                         <td> {dd_char.constitution}</td>
                         <td> <Button onClick={() => showSpellsModal(dd_char)}>View/Update Spells</Button></td>
                         <td> 
-                            <span className="delete-icon"><FontAwesomeIcon icon={faTrashCan}/></span>
-                            <span className="update-icon"><FontAwesomeIcon icon={faPen} /></span>
+                            <span className="delete-icon" onClick={() => deleteCharacterById(dd_char.id)}><FontAwesomeIcon icon={faTrashCan}/></span>
+                            <span className="update-icon" onClick={updateCharacter}><FontAwesomeIcon icon={faPen} /></span>
                         </td>
 
 

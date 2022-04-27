@@ -91,11 +91,6 @@ export default function CreateCharacterModal({show, onUpdate, onCancel}) {
 
                     </Form.Select>
                     
-                <p>Select a spell:</p>
-                    <Form.Select value={spellId} onChange={handleSpellChange} aria-label="Default select example">
-                        {allSpells.map(dd_spell => <option value={dd_spell.spell_id}>{dd_spell.spell_name}</option> )}
-
-                    </Form.Select>
             </Form>
 
         </Modal.Body>

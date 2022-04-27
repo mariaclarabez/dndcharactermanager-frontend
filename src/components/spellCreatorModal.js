@@ -63,6 +63,7 @@ export default function SpellCreatorModal({classid, characterid, onClose, show})
         </Modal.Header>
         <Modal.Body>
             <div style={{display: 'flex', flexDirection: "column"}}>
+                {_.isEmpty(allSpells) ? <p>This class cannot cast</p> : null}
                 {allSpells.map(spell => <Spell id={spell.id} name={spell.name} enabled={_.includes(knownSpells, spell.id)} onClick={() => toggleSpell(spell.id)} />)}
             </div>
         </Modal.Body>

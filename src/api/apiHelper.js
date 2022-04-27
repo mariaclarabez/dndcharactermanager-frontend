@@ -44,8 +44,6 @@ export async function removeSpellFromCharacter(character_id, spell_id) {
 }
 
 
-
-
 export async function getAllCampaigns() {
     const result = await fetch(CAMPAIGN_ENDPOINT);
     return result.json();
@@ -115,6 +113,36 @@ export async function createCharacter(char_name, class_id, race_id, campaign_id,
     console.log(result);
 
 }
+
+export async function updateCharacter(id, char_name, campaign_id) {
+    const requestBody = {char_name, campaign_id};
+    console.log(requestBody)
+    const result = await fetch( CHARACTER_ENDPOINT + `/${id}`, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+        method: 'PUT',
+        body: JSON.stringify(requestBody)
+    });
+    console.log(result);
+
+}
+
+ /* Delete character */
+export async function deleteCharacter(id) {
+    const result = await fetch(CHARACTER_ENDPOINT + `/${id}`, {
+         headers: {
+             'Accept': 'application/json',
+             'Content-Type': 'application/json'
+         },
+         method: 'DELETE',
+     });
+}
+
+/* Update character */
+
+
 export async function getCharacter() {
     console.log("Called", CHARACTER_ENDPOINT);
     const result = await fetch(CHARACTER_ENDPOINT);
