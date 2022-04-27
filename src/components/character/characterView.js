@@ -3,9 +3,10 @@ import React, {useState, useEffect} from "react";
 import Button from "react-bootstrap/Button";
 import Table from 'react-bootstrap/Table';
 import {useParams} from 'react-router-dom';
-import {getCharacter, createCharacter, deleteCharacter} from "../../api/apiHelper";
+import {getCharacter, createCharacter, deleteCharacter, updateCharacter} from "../../api/apiHelper";
 import SpellCreatorModal from "../spellCreatorModal";
 import CreateCampaignModal from "./campaignCreatorModal";
+import CharacterEditModal from "./characterEditModal";
 import CharacterCreatorModal from './characterCreatorModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faTrashCan} from '@fortawesome/free-solid-svg-icons';
@@ -21,7 +22,9 @@ export default function CharacterView(){
     const [show, setShow] = useState(false);
     const [showCampaign, setShowCampaign] = useState(false);
     const[showSpells, setShowSpells] = useState(false);
-    const [update, showUpdate] = useState(false);
+    const [showEdit, setShowEdit] = useState(false);
+    // const [idToEdit, setIdToEdit] = useState();
+    const [characterToEdit, setCharacterToEdit] = useState();
 
 
     const [spellsCharacter, setSpellsCharacter] = useState();
@@ -46,6 +49,13 @@ export default function CharacterView(){
         setShowCampaign(false);
     }
 
+    async function onEdit(name, campaignId) {
+        setShowEdit(false);
+        await updateCharacter(characterToEdit.id, name, campaignId);
+        fetchData();
+        
+    }
+
     async function onUpdate(name, classId, raceId, campaignId) {
         setShow(false);
         const ownerId = params.userId;
@@ -61,8 +71,9 @@ export default function CharacterView(){
 
     }
 
-    function updateCharacter () {
-
+    function showEditModal(character) {
+        setCharacterToEdit(character);
+        setShowEdit(true);
     }
 
     function showSpellsModal(character) {
@@ -83,6 +94,8 @@ export default function CharacterView(){
             <CreateCampaignModal show={showCampaign} onClose={onClose}/>
             
             <CharacterCreatorModal show={show} onCancel={onCancel} onUpdate={onUpdate}/>
+            <CharacterEditModal characterid={characterToEdit} show={showEdit} onUpdate={onEdit} onClose={() => setShowEdit(false)}/>
+
             <SpellCreatorModal characterid={_.get(spellsCharacter, 'id')} classid={_.get(spellsCharacter, 'class_id')} show={showSpells} onClose={() => setShowSpells(false)} />
             <Table striped bordered hover>
                 <thead>
@@ -121,7 +134,7 @@ export default function CharacterView(){
                         <td> <Button onClick={() => showSpellsModal(dd_char)}>View/Update Spells</Button></td>
                         <td> 
                             <span className="delete-icon" onClick={() => deleteCharacterById(dd_char.id)}><FontAwesomeIcon icon={faTrashCan}/></span>
-                            <span className="update-icon" onClick={updateCharacter}><FontAwesomeIcon icon={faPen} /></span>
+                            <span className="update-icon" onClick={() => showEditModal(dd_char)}><FontAwesomeIcon icon={faPen} /></span>
                         </td>
 
 
